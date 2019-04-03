@@ -8,14 +8,17 @@ import (
 	"github.com/urfave/cli"
 )
 
-// you cn see
+// example:  ./sample --lang "spanish" --dragon "bow to me" mx
+// the arguments are captured after the named arguments that is --
+// if the name of the string flag is the same as another then it will be a runtime error as soon as the application starts
 func main() {
 	var language string
 	var dragon string
 	app := cli.NewApp()
-	var printString string
+	//var printString string
 	var greeting string
-	
+	var name string
+
 	//the name value etc on the left is what the cli requires,
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
@@ -26,7 +29,7 @@ func main() {
 		},
 		cli.StringFlag{
 			Name:        "dragon",
-			Value:       "english",
+			Value:       "",
 			Usage:       "are you a dragon ?",
 			Destination: &dragon,
 		},
@@ -36,7 +39,7 @@ func main() {
 	app.Usage = "this says hello"
 
 	app.Action = func(c *cli.Context) error {
-		name := "there"
+		
 		if c.NArg() > 0 {
 			name = c.Args()[0]
 		}
@@ -46,7 +49,8 @@ func main() {
 		} else {
 			greeting = "hello"
 		}
-		
+
+		fmt.Println(greeting+ " " + name + " " + dragon)
 		return nil
 	}
 	err := app.Run(os.Args)
