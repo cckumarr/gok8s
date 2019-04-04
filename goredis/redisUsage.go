@@ -13,16 +13,16 @@ func main() {
 		DB:       0,
 	})
 
-	err := client.Set("key", "value", 0).Err()
+	err := client.Set("hello", "hellovalue", 0).Err()
 	if err != nil {
 		panic(err)
 	}
 
-	val, err := client.Get("key").Result()
+	val, err := client.Get("hello").Result()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("key", val)
+	fmt.Println("hello", val)
 
 	val2, err := client.Get("key2").Result()
 	if err == redis.Nil {
