@@ -11,6 +11,8 @@ import (
 )
 
 func main() {
+	var correct int
+	var total int
 	csvfile, _ := os.Open("problems.csv")
 	reader := csv.NewReader(bufio.NewReader(csvfile))
 
@@ -27,9 +29,12 @@ func main() {
 		sentence, _ := buf.ReadString('\n')
 		fmt.Print(sentence)
 		if strings.TrimRight(sentence, "\n") == string(line[1]) {
-			fmt.Println("true")
+			//fmt.Println("true")
+			correct++
 		} else {
 			fmt.Println("false")
 		}
+		total++
 	}
+	fmt.Printf("total questions: %d total correct: %d", total, correct)
 }
